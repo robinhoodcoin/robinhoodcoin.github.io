@@ -8,9 +8,68 @@
         text-align: center;
         font-family: sans-serif;
       }
+      #moneybag {
+        position: absolute;
+        width: 350px;
+        height: 500px;
+        -webkit-animation-name: spin;
+        -webkit-animation-duration: 4000ms;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: linear;
+        -moz-animation-name: spin;
+        -moz-animation-duration: 4000ms;
+        -moz-animation-iteration-count: infinite;
+        -moz-animation-timing-function: linear;
+        -ms-animation-name: spin;
+        -ms-animation-duration: 4000ms;
+        -ms-animation-iteration-count: infinite;
+        -ms-animation-timing-function: linear;
+
+        animation-name: spin;
+        animation-duration: 4000ms;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+      }
+      @-moz-keyframes spin {
+        from {
+          top: 0px;
+          left: -350px;
+          -moz-transform: rotate(0deg);
+        }
+        to {
+          top: 0px;
+          left: 100%;
+          -moz-transform: rotate(360deg);
+        }
+      }
+      @-webkit-keyframes spin {
+        from {
+          top: 0px;
+          left: -350px;
+          -webkit-transform: rotate(0deg);
+        }
+        to {
+          top: 0px;
+          left: 100%;
+          -webkit-transform: rotate(360deg);
+        }
+      }
+      @keyframes spin {
+        from {
+          top: 0px;
+          left: -350px;
+          transform:rotate(0deg);
+        }
+        to {
+          top: 0px;
+          left: 100%;
+          transform:rotate(360deg);
+        }
+      }
     </style>
   </head>
   <body style="text-align: center">
+  <img id='moneybag' src='./bag.png'></img>
   <h1>are you POOR???</h1>
   <h2>do you hate RICH PEOPLE and want to take all their money??????</h2>
   <h2>well do we have an offer for you!</h2>
