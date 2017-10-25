@@ -65,3 +65,13 @@ a {
     transform:rotate(360deg);
   }
 }
+
+#about-creators {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#about-creator {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Getting Started with Robinhood Coin</title>
+    <link rel='stylesheet' href='./assets/css/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="./assets/javascript/application.js"></script>
+  </head>
+  <h1>Getting Started</h1>
+  <br />
+
+  <body style="text-align: left">
+    <h4>1. Download a wallet to get started</h3>
+    <p>
+      You need a wallet that allows you to execute contract code
+      <ul>
+        <li><a href="https://github.com/ethereum/mist/releases">Mist Wallet</a></li>
+      </ul>
+    </p>
+
+    <br />
+    <br />
+
+    <h4>2. Start Mist using the Rinkeby Testnet</h3>
+    <p>
+      You can get some Ethereum from the <a href="https://faucet.rinkeby.io/">Rinkeby faucet</a>
+    </p>
+
+    <br />
+    <br />
+
+    <h4>3. Watch the Robinhood Coin Contract</h4>
+    <p>
+      Under the CONTRACTS tab click WATCH CONTRACT.
+      <br />
+      <br />
+      <img src="./assets/images/mistsetup/1_watch_contract.png" style="margin: auto;"/>
+      <br />
+      <br />
+
+      The Watch contract pop up should appear and you will enter
+      <ul id="new-projects">
+        <li><button type="button" class="btn btn-info btn-sm" onclick="popup(rinkeby.address)">CONTRACT ADDRESS</button></li>
+        <li><button type="button" class="btn btn-info btn-sm" onclick="popup(rinkeby.name)">CONTRACT NAME</button></li>
+        <li><button type="button" class="btn btn-info btn-sm" onclick="popup(rinkeby.json)">JSON INTERFACE</button></li>
+      </ul>
+      <br />
+      <img src="./assets/images/mistsetup/2_watch_contract_tab.png" style="margin: auto;"/>
+      <br />
+    </p>
+
+    <br />
+    <br />
+
+    <h4>4. Watch the Robinhood Coin Token</h4>
+    <p>
+      The Robinhood Coin Contract should now be visible in your CONTRACTS tab.<br />
+      To see how much Robinhood Coin you have you need to watch the Token. <br />
+      Click on WATCH TOKEN.
+      <br />
+      <br />
+      <img src="./assets/images/mistsetup/3_view_contracts.png" style="margin: auto;"/>
+      <br />
+      <br />
+      You can then paste the <button type="button" class="btn btn-info btn-sm" onclick="popup(rinkeby.address)">TOKEN ADDRESS</button> in the TOKEN ADDRESS field.
+      The rest should automatically populate.
+      <br />
+      <br />
+      <img src="./assets/images/mistsetup/5_watch_token_with_address.png" style="margin: auto;"/>
+      <br />
+      <br />
+      Click OK and you should then be able to see how much Robinhood Coins you have!
+      <br />
+    </p>
+
+  </body>
+
+  <br />
+  <br />
+  <footer style="text-align: center">
+    <a href="./rinkeby.html">Rinkeby Contract</a> | <a href="https://github.com/robinhoodcoin/RobinhoodCoin">Source</a> | <a href="./about.html">About</a>
+  </footer>
+</html>

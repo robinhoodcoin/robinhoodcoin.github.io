@@ -1,24 +1,42 @@
-
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Robinhood Coin</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title>Robinhood Coin Contract on Rinkeby</title>
+    <link rel='stylesheet' href='./assets/css/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="./assets/javascript/application.js"></script>
   </head>
   <body style="text-align: center">
     <h1>Rinkeby Network</h1>
     <p>
       Contract address: <br />
-      <div class="well well-sm">
-      0x1856323c840943a882f2ce7ec1069d6d5458800f
+      <div class="well well-sm" id="contract_address">
+      </div>
+    </p>
+    <br />
+    <p>
+      Contract name: <br />
+      <div class="well well-sm" id="contract_name">
     </div>
-    </p><br />
+    </p>
+    <br />
     <p>
       JSON Interface: <br />
-      <div class="well well-sm">
-         [{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]      </div>
+      <div class="well well-sm" id="json_interface">
+      </div>
     </p>
   </body>
+  <footer>
+    <a href="./howto.html">Getting Started</a> | <a href="https://github.com/robinhoodcoin/RobinhoodCoin">Source</a> | <a href="./about.html">About</a>
+  </footer>
 </html>
+
+<script>
+window.onload = function(){
+    document.getElementById('contract_address').innerHTML = rinkeby.address;
+    document.getElementById('contract_name').innerHTML = rinkeby.name;
+    document.getElementById('json_interface').innerHTML = rinkeby.json;
+};
+</script>
