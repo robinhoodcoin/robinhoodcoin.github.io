@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Robinhood Coin Contract on Rinkeby</title>
+    <title>Robinhood Coin Contract</title>
     <link rel='stylesheet' href='./assets/css/style.css' />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -9,7 +9,13 @@
     <script src="./assets/javascript/application.js"></script>
   </head>
   <body style="text-align: center">
-    <h1>Rinkeby Network</h1>
+    <h1>Network</h1>
+
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" onclick="loadRinkeby()">Rinkeby</a></li>
+      <li><a data-toggle="tab" onclick="loadLivenet()">Livenet</a></li>
+    </ul>
+    <br />
     <p>
       Contract address: <br />
       <div class="well well-sm" id="contract_address">
@@ -34,9 +40,18 @@
 </html>
 
 <script>
-window.onload = function(){
+window.onload = loadRinkeby();
+
+function loadRinkeby() {
     document.getElementById('contract_address').innerHTML = rinkeby.address;
     document.getElementById('contract_name').innerHTML = rinkeby.name;
     document.getElementById('json_interface').innerHTML = rinkeby.json;
-};
+}
+
+function loadLivenet() {
+    document.getElementById('contract_address').innerHTML = livenet.address;
+    document.getElementById('contract_name').innerHTML = livenet.name;
+    document.getElementById('json_interface').innerHTML = livenet.json;
+}
+
 </script>
