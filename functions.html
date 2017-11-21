@@ -35,12 +35,18 @@
 
   <h2>Public Functions</h2>
   <div style="text-align: left">
-    <code>balanceOf(address _owner) public view returns (uint256 balance)</code> <br /><br />
-    <code>GetPaid(uint _nonce) public returns (uint256 reward)</code> <br /><br />
-    <code>TakeFromTheRich(uint _nonce) public payable returns (uint256 reward)</code> <br /><br />
-    <code>transfer(address _to, uint256 _value) public returns (bool)</code> <br /><br />
-    <code>buyRobinhoodCoin() public payable returns (uint256 amount)</code> <br /><br />
-    <code>setTaxPercent(uint _newTaxPercent) public onlyKing</code> <br /><br />
+    <code>balanceOf(address _owner) public view returns (uint256 balance)</code><br />
+    Takes an address as a parameter and returns the balance associated with that address<br /><br />
+    <code>GetPaid(uint _nonce) public returns (uint256 reward)</code> <br />
+    Perform proof of work to get a set amount of tokens from the government address<br /><br />
+    <code>TakeFromTheRich(uint _nonce) public payable returns (uint256 reward)</code> <br />
+    Perform proof of work to get a percentage of tokens from a random address from <code>richDudes</code> Putting Ether in can increase the amount stolen<br /><br />
+    <code>transfer(address _to, uint256 _value) public returns (bool)</code> <br />
+    Transfer robinhood coin from your address to another<br /><br />
+    <code>buyRobinhoodCoin() public payable returns (uint256 amount)</code> <br />
+    Send Ethereum to the contract in order to receive robinhood coin<br /><br />
+    <code>setTaxPercent(uint _newTaxPercent) public onlyKing</code> <br />
+    Set the taxPercent used when calculating tax for transfers.<br /><br />
   </div>
 
   <h2>Events</h2>
