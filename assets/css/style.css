@@ -75,3 +75,8 @@ a {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+#icon {
+    max-width: 80px;
+    height: 80px;
+}

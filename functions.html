@@ -19,10 +19,12 @@
 
     <h3>Roles</h3>
     <code>address[] public richDudes</code> List of addresses considered <code>wealthy</code> <br /><br />
+    <code>mapping (address => uint) elites</code> List of addresses considered <code>Elite</code> <br /><br />
     <code>address public king</code> Address that has more than 50% of <code>totalSupply</code>. Receives taxes. Can change <code>taxPercent</code> <br /><br />
     <code>address public government</code> Address that receives taxes when there is no king <br /><br />
     <code>uint256 public taxPercent</code> Percent taxed on all transfers. DEFAULT = 1 <br /><br />
-    <code>uint256 wealthy</code> Minimum amount to be considered wealthy <br /><br />
+    <code>uint256 public wealthyMin</code> Minimum amount to be considered wealthy <br /><br />
+    <code>uint256 public eliteMin</code> Minimum amount to be considered elite <br /><br />
 
     <h3>Mining variables</h3>
     <code>uint256 public baseWage</code> Amount received when trying to <code>GetPaid</code> <br /><br />
@@ -55,6 +57,7 @@
     <code>Payday(address indexed _government, address indexed _worker, uint256 _amountPaid)</code> <br /><br />
     <code>Transfer(address indexed _from, address indexed _to, uint256 _value)</code> <br /><br />
     <code>Tax(address indexed _taxPayer, address indexed _taxCollector, uint256 _value)</code> <br /><br />
+    <code>event Elite(address indexed _winner)</code> <br /><br />
   </div>
 
   <footer>
