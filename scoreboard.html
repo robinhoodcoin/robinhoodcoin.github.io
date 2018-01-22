@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>List of Elites</title>
+    <link rel='stylesheet' href='./assets/css/style.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="./assets/javascript/application.js"></script>
+    <script src="./assets/javascript/web3.min.js"></script>
+  </head>
+  <h2>Scoreboard</h2>
+  <p>The tables below contains a list of addresses with <code>elite/wealthy</code> status.</p>
+    <body>
+      <ul class="nav nav-tabs">
+        <li role="presentation" class="active dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            Elites <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a data-toggle="tab" onclick="loadContract('rinkeby', 'elites')">Rinkeby</a></li>
+            <li><a data-toggle="tab" onclick="loadContract('mainnet', 'elites')">Mainnet</a></li>
+          </ul>
+        </li>
+        <li role="presentation" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              Wealthy <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a data-toggle="tab" onclick="loadContract('rinkeby', 'richDudes')">Rinkeby</a></li>
+              <li><a data-toggle="tab" onclick="loadContract('mainnet', 'richDudes')">Mainnet</a></li>
+            </ul>
+          </li>
+      </ul>
+
+      <br />
+
+      <div id="none">No addresses to display...</div>
+
+      <table id="contractTable" style="display:'none';"class="table table-bordered table-hover table-sm">
+        <thead>
+          <tr>
+            <th id="titleCell0">Address</th>
+            <th id="titleCell1"></th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+
+    </body>
+    <br />
+    <footer>
+      <a href="./contract.html">Contract</a> | <a href="./howto.html">Getting Started</a> | <a href="https://github.com/robinhoodcoin/RobinhoodCoin">Source</a> | <a href="./functions.html">API</a> | <a href="./developers.html">Developers</a><br />
+    </footer>
+</html>
+
+<script>
+var Web3 = require("web3");
+window.onload = loadContract('rinkeby', 'elites');
+
+function loadContract(network, variable) {
+    if (network == "rinkeby") {
+      var contractJson = rinkeby.json;
+      var contractAddress = rinkeby.address;
+      var provider = 'https://rinkeby.infura.io/';
+    } else if (network == "mainnet") {
+      var contractJson = livenet.json;
+      var contractAddress = livenet.address;
+      var provider = 'https://mainnet.infura.io/';
+    } else {
+      return;
+    }
+
+    $("#contractTable > tbody").html("");
+    document.getElementById('contractTable').style.display = 'none';
+    document.getElementById('none').style.display = '';
+
+    var table = document.getElementById('contractTable').getElementsByTagName('tbody')[0];
+    var web3 = new Web3(new Web3.providers.HttpProvider(provider));
+    var MyContract = web3.eth.contract(JSON.parse(contractJson));
+    var myContractInstance = MyContract.at(contractAddress);
+    var count = (variable == 'elites') ? myContractInstance.getElitesCount.call() : myContractInstance.getRichDudesCount.call();
+
+    if (count <= 0) {
+      return;
+    }
+
+    document.getElementById('titleCell1').innerHTML = (variable == 'elites') ? 'Time' : 'Holdings';
+    document.getElementById('contractTable').style.display = '';
+    document.getElementById('none').style.display = 'none';
+
+    for (var i = 0; i < count; i++) {
+        var address = (variable == 'elites') ? myContractInstance.elites.call(i) : myContractInstance.richDudes.call(i);
+        var value = (variable == 'elites') ? myContractInstance.elitesTime.call(address) : myContractInstance.balanceOf.call(address);
+
+        var newRow = table.insertRow(i);
+        var newCell  = newRow.insertCell(0);
+        var newText  = document.createTextNode(address);
+        newCell.appendChild(newText);
+
+        newCell  = newRow.insertCell(1);
+        newText  = document.createTextNode(value);
+        newCell.appendChild(newText);
+    }
+}
+
+</script>
