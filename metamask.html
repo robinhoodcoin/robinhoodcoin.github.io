@@ -40,8 +40,14 @@ function balanceOf() {
     if (!address) {
         return;
     }
-    var balance = this.myContractInstance.balanceOf.call(address);
-    alert('Balance of '+address+': '+balance);
+    this.myContractInstance.balanceOf.call(address, function(error, balance) {
+      if (error) {
+        return;
+      }
+      
+      alert('Balance of '+address+': '+balance);
+    });
+
 }
 
 function loadContract() {
