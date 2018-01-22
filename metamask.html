@@ -22,6 +22,15 @@
         <button type="button" class="btn btn-primary" onclick="balanceOf()">balanceOf()</button>
       </div>
     </form>
+    <br />
+
+    <form class="form-inline">
+      <div class="form-group">
+        <label class="col-form-label" for="getPaidNonce">Nonce</label>
+        <input type="text" class="form-control mx-sm-3" id="getPaidNonce">
+        <button type="button" class="btn btn-primary" onclick="getPaid()">getPaid()</button>
+      </div>
+    </form>
 
   </body>
   <br />
@@ -44,7 +53,6 @@ function balanceOf() {
         return;
     }
 
-    console.log(address)
     this.myContractInstance.balanceOf.call(address, function(error, balance) {
       if (error) {
         return;
@@ -52,7 +60,21 @@ function balanceOf() {
 
       alert(balance.c[0] + ' RHC');
     });
+}
 
+function getPaid() {
+  var nonce = document.getElementById("getPaidNonce").value;
+  if (!nonce) {
+      return;
+  }
+
+  this.myContractInstance.GetPaid.call(nonce, function(error, reward) {
+    if (error) {
+      return;
+    }
+
+    alert('You got cash! ' + reward.c[0]);
+  });
 }
 
 function loadContract() {
