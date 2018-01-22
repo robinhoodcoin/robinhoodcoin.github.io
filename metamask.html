@@ -65,7 +65,7 @@ function loadContract() {
     }
 
     self.MyContract = self.web3.eth.contract(self.abi);
-    self.myContractInstance = MyContract.at(self.address);
+    self.myContractInstance = self.MyContract.at(self.address);
   });
 }
 
