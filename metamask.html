@@ -36,7 +36,10 @@ let MyContract;
 let myContractInstance;
 
 function balanceOf() {
-    var address = document.getElementsByName("balanceOfAddress").value;
+    var address = document.getElementById("balanceOfAddress").value;
+    if (!address) {
+        return;
+    }
     var balance = this.myContractInstance.balanceOf.call(address);
     alert('Balance of '+address+': '+balance);
 }
