@@ -19,7 +19,8 @@
 
     <h3>Roles</h3>
     <code>address[] public richDudes</code> List of addresses considered <code>wealthy</code> <br /><br />
-    <code>mapping (address => uint) elites</code> List of addresses considered <code>Elite</code> <br /><br />
+    <code>mapping(address => uint) public elitesTime</code> Map of addresses considered <code>Elite</code> with the value being the time they became elite<br /><br />
+    <code>address[] public elites</code> List of addresses considered <code>Elite</code> <br /><br />
     <code>address public king</code> Address that has more than 50% of <code>totalSupply</code>. Receives taxes. Can change <code>taxPercent</code> <br /><br />
     <code>address public government</code> Address that receives taxes when there is no king <br /><br />
     <code>uint256 public taxPercent</code> Percent taxed on all transfers. DEFAULT = 1 <br /><br />
@@ -49,6 +50,10 @@
     Send Ethereum to the contract in order to receive robinhood coin<br /><br />
     <code>setTaxPercent(uint _newTaxPercent) public onlyKing</code> <br />
     Set the taxPercent used when calculating tax for transfers.<br /><br />
+    <code>getRichDudesCount() public view returns (uint)</code> <br />
+    Return richDudes length.<br /><br />
+    <code>getElitesCount() public view returns (uint)</code> <br />
+    Return elites length.<br /><br />
   </div>
 
   <h2>Events</h2>
@@ -61,6 +66,6 @@
   </div>
 
   <footer>
-    <a href="./contract.html">Contract</a> | <a href="./howto.html">Getting Started</a> | <a href="https://github.com/robinhoodcoin/RobinhoodCoin">Source</a> | <a href="./developers.html">Developers</a>
+    <a href="./contract.html">Contract</a> | <a href="./howto.html">Getting Started</a> | <a href="https://github.com/robinhoodcoin/RobinhoodCoin">Source</a> | <a href="./developers.html">Developers</a> | <a href="./elites.html">Elite Scoreboard</a>
   </footer>
 </html>
