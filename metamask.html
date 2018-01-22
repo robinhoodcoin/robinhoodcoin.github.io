@@ -10,13 +10,21 @@
     <script src="./assets/javascript/web3.min.js"></script>
   </head>
   <h2>Interact with the Contract</h2>
-    <body>
-      <div id="noMetamask" style="display:'none';">No metamask was detected. Please install metamask to interact with Robinhood Coin<br /></div>
-    </body>
-    <br />
-    <footer>
-      <a href="./contract.html">Contract</a> | <a href="./howto.html">Getting Started</a> | <a href="https://github.com/robinhoodcoin/RobinhoodCoin">Source</a> | <a href="documentation.html">Documentation</a> | <a href="./developers.html">Developers</a> | <a href="./scoreboard.html">Scoreboard</a> | <b>Metamask</b><br />
-    </footer>
+  <body>
+    <div id="noMetamask" style="display:'none';">No metamask was detected. Please install metamask to interact with Robinhood Coin<br /></div>
+
+    <form class="form-inline">
+      <label class="sr-only" for="balanceOfAddress">Address</label>
+      <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="balanceOfAddress" placeholder="0x0">
+
+      <button type="button" class="btn btn-primary" onclick="balanceOf()">balanceOf()</button>
+    </form>
+
+  </body>
+  <br />
+  <footer>
+    <a href="./contract.html">Contract</a> | <a href="./howto.html">Getting Started</a> | <a href="https://github.com/robinhoodcoin/RobinhoodCoin">Source</a> | <a href="documentation.html">Documentation</a> | <a href="./developers.html">Developers</a> | <a href="./scoreboard.html">Scoreboard</a> | <b>Metamask</b><br />
+  </footer>
 </html>
 
 <script>
@@ -26,6 +34,12 @@ let abi;
 let contractAddress;
 let MyContract;
 let myContractInstance;
+
+function balanceOf() {
+    var address = document.getElementsByName("balanceOfAddress").value;
+    var balance = this.myContractInstance.balanceOf.call(address);
+    alert('Balance of '+address+': '+balance);
+}
 
 function loadContract() {
   var self = this;
