@@ -51,7 +51,7 @@
     </body>
     <br />
     <footer>
-      <a href="./contract.html">Contract</a> | <a href="./howto.html">Getting Started</a> | <a href="https://github.com/robinhoodcoin/RobinhoodCoin">Source</a> | <a href="./functions.html">API</a> | <a href="./developers.html">Developers</a><br />
+      <a href="./contract.html">Contract</a> | <a href="./howto.html">Getting Started</a> | <a href="https://github.com/robinhoodcoin/RobinhoodCoin">Source</a> | <a href="documentation.html">Documentation</a> | <a href="./developers.html">Developers</a> | <b>Scoreboard</b> | <a href="./metamask.html">Metamask</a><br />
     </footer>
 </html>
 
@@ -65,8 +65,8 @@ function loadContract(network, variable) {
       var contractAddress = rinkeby.address;
       var provider = 'https://rinkeby.infura.io/';
     } else if (network == "mainnet") {
-      var contractJson = livenet.json;
-      var contractAddress = livenet.address;
+      var contractJson = mainnet.json;
+      var contractAddress = mainnet.address;
       var provider = 'https://mainnet.infura.io/';
     } else {
       return;

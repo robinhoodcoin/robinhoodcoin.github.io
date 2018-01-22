@@ -13,7 +13,7 @@
 
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" onclick="loadRinkeby()">Rinkeby</a></li>
-      <li><a data-toggle="tab" onclick="loadLivenet()">Livenet</a></li>
+      <li><a data-toggle="tab" onclick="loadMainnet()">mainnet</a></li>
     </ul>
     <br />
     <p>
@@ -35,7 +35,7 @@
     </p>
   </body>
   <footer>
-    <a href="./howto.html">Getting Started</a> | <a href="https://github.com/robinhoodcoin/RobinhoodCoin">Source</a> | <a href="./functions.html">API</a> | <a href="./developers.html">Developers</a> | <a href="./scoreboard.html">Scoreboard</a>
+    <b>Contract</b> | <a href="./howto.html">Getting Started</a> | <a href="https://github.com/robinhoodcoin/RobinhoodCoin">Source</a> | <a href="documentation.html">Documentation</a> | <a href="./developers.html">Developers</a> | <a href="./scoreboard.html">Scoreboard</a> | <a href="./metamask.html">Metamask</a><br />
   </footer>
 </html>
 
@@ -48,10 +48,10 @@ function loadRinkeby() {
     document.getElementById('json_interface').innerHTML = rinkeby.json;
 }
 
-function loadLivenet() {
-    document.getElementById('contract_address').innerHTML = livenet.address;
-    document.getElementById('contract_name').innerHTML = livenet.name;
-    document.getElementById('json_interface').innerHTML = livenet.json;
+function loadMainnet() {
+    document.getElementById('contract_address').innerHTML = mainnet.address;
+    document.getElementById('contract_name').innerHTML = mainnet.name;
+    document.getElementById('json_interface').innerHTML = mainnet.json;
 }
 
 </script>

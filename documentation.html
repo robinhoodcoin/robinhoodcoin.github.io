@@ -16,16 +16,16 @@
     <code>string public symbol</code> Shorthand for Robinhood Coin <br /><br />
     <code>uint256 public decimals</code> Number of decimal places for Robinhood Coin <br /><br />
     <code>uint256 public totalSupply</code> Total supply of Robinhood Coins available. <br /><br />
-
-    <h3>Roles</h3>
-    <code>address[] public richDudes</code> List of addresses considered <code>wealthy</code> <br /><br />
-    <code>mapping(address => uint) public elitesTime</code> Map of addresses considered <code>Elite</code> with the value being the time they became elite<br /><br />
-    <code>address[] public elites</code> List of addresses considered <code>Elite</code> <br /><br />
-    <code>address public king</code> Address that has more than 50% of <code>totalSupply</code>. Receives taxes. Can change <code>taxPercent</code> <br /><br />
-    <code>address public government</code> Address that receives taxes when there is no king <br /><br />
     <code>uint256 public taxPercent</code> Percent taxed on all transfers. DEFAULT = 1 <br /><br />
     <code>uint256 public wealthyMin</code> Minimum amount to be considered wealthy <br /><br />
     <code>uint256 public eliteMin</code> Minimum amount to be considered elite <br /><br />
+
+    <h3>Roles</h3>
+    <code>address[] public richDudes</code> List of addresses considered <code>wealthy</code> <br /><br />
+    <code>address[] public elites</code> List of addresses considered <code>Elite</code> <br /><br />
+    <code>mapping(address => uint) public elitesTime</code> Map of addresses considered <code>Elite</code> with the value being the time they became elite<br /><br />
+    <code>address public king</code> Address that has more than 50% of <code>totalSupply</code>. Receives taxes. Can change <code>taxPercent</code> <br /><br />
+    <code>address public government</code> Address that receives taxes when there is no king <br /><br />
 
     <h3>Mining variables</h3>
     <code>uint256 public baseWage</code> Amount received when trying to <code>GetPaid</code> <br /><br />
@@ -66,6 +66,6 @@
   </div>
 
   <footer>
-    <a href="./contract.html">Contract</a> | <a href="./howto.html">Getting Started</a> | <a href="https://github.com/robinhoodcoin/RobinhoodCoin">Source</a> | <a href="./developers.html">Developers</a> | <a href="./scoreboard.html">Scoreboard</a>
+    <a href="./contract.html">Contract</a> | <a href="./howto.html">Getting Started</a> | <a href="https://github.com/robinhoodcoin/RobinhoodCoin">Source</a> | <b>Documentation</b> | <a href="./developers.html">Developers</a> | <a href="./scoreboard.html">Scoreboard</a> | <a href="./metamask.html">Metamask</a><br />
   </footer>
 </html>

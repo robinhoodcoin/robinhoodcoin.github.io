@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Metamask</title>
+    <link rel='stylesheet' href='./assets/css/style.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="./assets/javascript/application.js"></script>
+    <script src="./assets/javascript/web3.min.js"></script>
+  </head>
+  <h2>Interact with the Contract</h2>
+    <body>
+      <div id="noMetamask" style="display:'none';">No metamask was detected. Please install metamask to interact with Robinhood Coin<br /></div>
+    </body>
+    <br />
+    <footer>
+      <a href="./contract.html">Contract</a> | <a href="./howto.html">Getting Started</a> | <a href="https://github.com/robinhoodcoin/RobinhoodCoin">Source</a> | <a href="documentation.html">Documentation</a> | <a href="./developers.html">Developers</a> | <a href="./scoreboard.html">Scoreboard</a> | <b>Metamask</b><br />
+    </footer>
+</html>
+
+<script>
+var Web3 = require("web3");
+
+let abi;
+let contractAddress;
+let MyContract;
+let myContractInstance;
+
+function loadContract() {
+  var self = this;
+  // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+  if (typeof this.web3 !== 'undefined') {
+    // Use the browser's ethereum provider
+    var provider = web3.currentProvider;
+    document.getElementById('noMetamask').style.display = 'none';
+  } else {
+    console.log('No web3? You should consider trying MetaMask!');
+    document.getElementById('noMetamask').style.display = '';
+    return;
+  }
+
+  this.web3 = new Web3(provider);
+
+  this.web3.version.getNetwork((err, netId) => {
+    switch (netId) {
+      case "1":
+        self.abi = JSON.parse(mainnet.json);
+        self.contractAddress = mainnet.address;
+        break
+      case "3":
+        self.abi = JSON.parse(ropsten.json);
+        self.contractAddress = ropsten.address;
+        break
+      case "4":
+        self.abi = JSON.parse(rinkeby.json);
+        self.contractAddress = rinkeby.address;
+        break
+      case "42":
+        self.abi = JSON.parse(kovan.json);
+        self.contractAddress = kovan.address;
+        break
+      default:
+        console.log('This is an unknown network.');
+    }
+
+    self.MyContract = self.web3.eth.contract(JSON.parse(contractJson));
+    self.myContractInstance = MyContract.at(contractAddress);
+  });
+}
+
+window.addEventListener('load', loadContract());
+</script>
