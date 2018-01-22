@@ -64,8 +64,8 @@ function loadContract() {
         console.log('This is an unknown network.');
     }
 
-    self.MyContract = self.web3.eth.contract(JSON.parse(contractJson));
-    self.myContractInstance = MyContract.at(contractAddress);
+    self.MyContract = self.web3.eth.contract(self.abi);
+    self.myContractInstance = MyContract.at(self.address);
   });
 }
 
