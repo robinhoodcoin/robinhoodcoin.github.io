@@ -11,13 +11,16 @@
   </head>
   <h2>Interact with the Contract</h2>
   <body>
-    <div id="noMetamask" style="display:'none';">No metamask was detected. Please install metamask to interact with Robinhood Coin<br /></div>
+    <br />
+    <div id="noMetamask" class="alert alert-danger" role="alert" style="display:'none';">No metamask was detected. Please install metamask to interact with Robinhood Coin</div>
+    <br />
 
     <form class="form-inline">
-      <label class="sr-only" for="balanceOfAddress">Address</label>
-      <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="balanceOfAddress" placeholder="0x0">
-
-      <button type="button" class="btn btn-primary" onclick="balanceOf()">balanceOf()</button>
+      <div class="form-group">
+        <label class="col-form-label" for="balanceOfAddress">Address</label>
+        <input type="text" class="form-control mx-sm-3" id="balanceOfAddress" placeholder="0x0">
+        <button type="button" class="btn btn-primary" onclick="balanceOf()">balanceOf()</button>
+      </div>
     </form>
 
   </body>
