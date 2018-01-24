@@ -58,7 +58,7 @@ function balanceOf() {
         return;
       }
 
-      alert(balance.c[0] + ' RHC');
+      alert(balance.toNumber() + ' RHC');
     });
 }
 
@@ -73,7 +73,7 @@ function getPaid() {
       return;
     }
 
-    alert('You got cash! ' + reward.c[0]);
+    alert('reward: ' + reward.toNumber());
   });
 }
 
@@ -95,27 +95,27 @@ function loadContract() {
   this.web3.version.getNetwork((err, netId) => {
     switch (netId) {
       case "1":
-        self.abi = JSON.parse(mainnet.json);
+        self.abi = mainnet.json;
         self.contractAddress = mainnet.address;
         break
       case "3":
-        self.abi = JSON.parse(ropsten.json);
+        self.abi = ropsten.json;
         self.contractAddress = ropsten.address;
         break
       case "4":
-        self.abi = JSON.parse(rinkeby.json);
+        self.abi = rinkeby.json;
         self.contractAddress = rinkeby.address;
         break
       case "42":
-        self.abi = JSON.parse(kovan.json);
+        self.abi = kovan.json;
         self.contractAddress = kovan.address;
         break
       default:
         console.log('This is an unknown network.');
     }
 
-    self.MyContract = self.web3.eth.contract(self.abi);
-    self.myContractInstance = self.MyContract.at(self.address);
+    self.MyContract = self.web3.eth.contract(JSON.parse(self.abi));
+    self.myContractInstance = self.MyContract.at(self.contractAddress);
   });
 }
 

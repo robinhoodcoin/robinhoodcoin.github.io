@@ -44,7 +44,7 @@
             <th id="titleCell1"></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="contractTableBody">
         </tbody>
       </table>
 
@@ -72,7 +72,7 @@ function loadContract(network, variable) {
       return;
     }
 
-    $("#contractTable > tbody").html("");
+    document.getElementById('contractTableBody').innerHTML = '';
     document.getElementById('contractTable').style.display = 'none';
     document.getElementById('none').style.display = '';
 
@@ -80,8 +80,7 @@ function loadContract(network, variable) {
     var web3 = new Web3(new Web3.providers.HttpProvider(provider));
     var MyContract = web3.eth.contract(JSON.parse(contractJson));
     var myContractInstance = MyContract.at(contractAddress);
-    var count = (variable == 'elites') ? myContractInstance.getElitesCount.call() : myContractInstance.getRichDudesCount.call();
-
+    var count = (variable == 'elites') ? myContractInstance.getElitesCount.call().toNumber() : myContractInstance.getRichDudesCount.call().toNumber();
     if (count <= 0) {
       return;
     }
