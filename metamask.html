@@ -27,6 +27,7 @@
       <form class="form-inline">
         <div class="form-group">
           <input type="text" class="form-control mx-sm-3" id="getPaidNonce" placeholder="nonce">
+          <button type="button" class="btn btn-primary" onclick="generateNonce('getPaidNonce')">Generate Nonce</button>
           <button type="button" class="btn btn-primary" onclick="getPaid()">GetPaid()</button>
         </div>
       </form>
@@ -35,6 +36,7 @@
       <form class="form-inline">
         <div class="form-group">
           <input type="text" class="form-control mx-sm-3" id="takeFromRichNonce" placeholder="nonce">
+          <button type="button" class="btn btn-primary" onclick="generateNonce('takeFromRichNonce')">Generate Nonce</button>
           <button type="button" class="btn btn-primary" onclick="takeFromRich()">TakeFromTheRich()</button>
         </div>
       </form>
@@ -127,6 +129,43 @@ function transfer() {
 
     alert('success: ' + success);
   });
+}
+
+function generateNonce(id) {
+  var challenge;
+    this.myContractInstance.currentChallenge.call(function(err, res) {
+      challenge = res;
+      var difficulty;
+      if (id == 'getPaidNonce') {
+        this.myContractInstance.paydayDifficulty.call(
+          function(err, res){
+            difficulty = res;
+            console.log(difficulty);
+            console.log(challenge);
+            var nonce = generateNonceFrom(difficulty, challenge);
+            document.getElementById(id).innerHTML = nonce;
+          }
+        );
+      } else if (id == 'takeFromRichNonce') {
+        this.myContractInstance.robberyDifficulty.call(
+          function(err, res){
+            difficulty = res;
+            console.log(difficulty);
+            console.log(challenge);
+            var nonce = generateNonceFrom(difficulty, challenge);
+            document.getElementById(id).innerHTML = nonce;
+          }
+        );
+      } else {
+        return;
+      }
+    });
+}
+
+function generateNonceFrom(difficulty, challenge) {
+    var nonce = 'nonce';
+
+    return nonce;
 }
 
 function loadContract() {
