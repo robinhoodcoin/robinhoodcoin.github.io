@@ -9,9 +9,85 @@
     <script src="./assets/javascript/application.js"></script>
   </head>
 
-  <div class="container">
+  <h1>Getting Started</h1>
+
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" href="#" onclick="metamaskTutorial()">Metamask</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#" onclick="mistTutorial()">Mist</a>
+    </li>
+  </ul>
+
+    <div class="accordion panel-group" id="metamaskTutorial">
+      <br />
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#metamaskTutorial" href="#metamaskTutorialcollapse1">1. Install Metamask</a>
+          </h4>
+        </div>
+        <div id="metamaskTutorialcollapse1" class="panel-collapse collapse in">
+          <div class="panel-body">
+            You need a wallet that allows you to execute contract code. <br />
+            This guide is for <a href="https://metamask.io/">Metamask</a>. Install the proper extension for your browser
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#metamaskTutorial" href="#metamaskTutorialcollapse2">2. Start metamask using the Rinkeby Testnet</a>
+          </h4>
+        </div>
+        <div id="metamaskTutorialcollapse2" class="panel-collapse collapse">
+          <div class="panel-body">
+              You can get some Ethereum from the <a href="https://faucet.rinkeby.io/">Rinkeby faucet</a>
+              <br />
+              <br />
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#metamaskTutorial" href="#metamaskTutorialcollapse3">3. Watch the Robinhood Coin Token</a>
+          </h4>
+        </div>
+        <div id="metamaskTutorialcollapse3" class="panel-collapse collapse">
+          <div class="panel-body">
+            In Metamask click the ADD TOKEN button.
+            <br />
+            <br />
+            The Watch contract pop up should appear and you will enter
+            <br />
+            <br />
+            <button type="button" class="btn btn-info btn-sm" onclick="popup(rinkeby.address)">TOKEN CONTRACT ADDRESS</button>
+            <button type="button" class="btn btn-info btn-sm" onclick="popup('RHC')">TOKEN SYMBOL</button>
+            <button type="button" class="btn btn-info btn-sm" onclick="popup(0)">DECIMALS OF PRECISION</button>
+
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#metamaskTutorial" href="#metamaskTutorialcollapse4">4. Execute functions using the web</a>
+          </h4>
+        </div>
+        <div id="metamaskTutorialcollapse4" class="panel-collapse collapse">
+          <div class="panel-body">
+            You can interact with the network using the functions available on the <a href="./metamask.html">Metamask</a> page.
+            <br />
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  <div class="container" id="mistTutorial">
     <div class="panel-group" id="accordion">
-      <h1>Getting Started</h1>
       <br />
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -98,3 +174,19 @@
     <a href="./contract.html">Contract</a> | <b>Getting Started</b> | <a href="https://github.com/robinhoodcoin/RobinhoodCoin">Source</a> | <a href="documentation.html">Documentation</a> | <a href="./developers.html">Developers</a> | <a href="./scoreboard.html">Scoreboard</a> | <a href="./metamask.html">Metamask</a><br />
   </footer>
 </html>
+
+<script>
+
+function metamaskTutorial() {
+  document.getElementById('metamaskTutorial').style.display = '';
+  document.getElementById('mistTutorial').style.display = 'none';
+}
+
+function mistTutorial() {
+  document.getElementById('metamaskTutorial').style.display = 'none';
+  document.getElementById('mistTutorial').style.display = '';
+}
+
+window.onload = metamaskTutorial();
+
+</script>
