@@ -15,40 +15,54 @@
     <div id="noMetamask" class="alert alert-danger" role="alert" style="display:'none';">No metamask was detected. Please install metamask to interact with Robinhood Coin</div>
     <br />
 
-    <div id="rhcfunctions">
-      <form class="form-inline">
-        <div class="form-group">
-          <input type="text" class="form-control mx-sm-3" id="balanceOfAddress" placeholder="0xaddress">
-          <button type="button" class="btn btn-primary" onclick="balanceOf()">balanceOf()</button>
+    <div id="rhcfunctions"class="container">
+        <div class="row">
+            <div class="balances col-md-5">
+              Current balance: <span id="currentBalance"></span><br />
+            </div>
+            <div class="functions col-md-5"></div>
         </div>
-      </form>
-      <br />
+        <div class="row">
 
-      <form class="form-inline">
-        <div class="form-group">
-          <input type="text" class="form-control mx-sm-3" id="getPaidNonce" placeholder="nonce">
-          <button type="button" class="btn btn-primary" onclick="generateNonce('getPaidNonce')">Generate Nonce</button>
-          <button type="button" class="btn btn-primary" onclick="getPaid()">GetPaid()</button>
-        </div>
-      </form>
-      <br />
+            <div class="sendReceive col-md-5">
+              <form class="form-inline">
+                <div class="form-group">
+                  <input type="text" class="form-control mx-sm-3" id="transferAddress" placeholder="0xaddress">
+                  <input type="number" class="form-control mx-sm-3" id="transferValue" placeholder="0">
+                  <button type="button" class="btn btn-primary" onclick="transfer()">Send</button>
+                </div>
+              </form>
+            </div>
 
-      <form class="form-inline">
-        <div class="form-group">
-          <input type="text" class="form-control mx-sm-3" id="takeFromRichNonce" placeholder="nonce">
-          <button type="button" class="btn btn-primary" onclick="generateNonce('takeFromRichNonce')">Generate Nonce</button>
-          <button type="button" class="btn btn-primary" onclick="takeFromRich()">TakeFromTheRich()</button>
-        </div>
-      </form>
-      <br />
+            <div class="otherFunctions col-md-5">
 
-      <form class="form-inline">
-        <div class="form-group">
-          <input type="text" class="form-control mx-sm-3" id="transferAddress" placeholder="0xaddress">
-          <input type="number" class="form-control mx-sm-3" id="transferValue" placeholder="0">
-          <button type="button" class="btn btn-primary" onclick="transfer()">transfer()</button>
+              <form class="form-inline">
+                <div class="form-group">
+                  <input type="text" class="form-control mx-sm-3" id="balanceOfAddress" placeholder="0xaddress">
+                  <button type="button" class="btn btn-primary" onclick="balanceOf()">Check Balance</button>
+                </div>
+              </form>
+              <br />
+
+              <form class="form-inline">
+                <div class="form-group">
+                  <input type="text" class="form-control mx-sm-3" id="getPaidNonce" placeholder="nonce">
+                  <button type="button" class="btn btn-primary" onclick="generateNonce('getPaidNonce')">Do Work</button>
+                  <button type="button" class="btn btn-primary" onclick="getPaid()">Get Paid</button>
+                </div>
+              </form>
+              <br />
+
+              <form class="form-inline">
+                <div class="form-group">
+                  <input type="text" class="form-control mx-sm-3" id="takeFromRichNonce" placeholder="nonce">
+                  <button type="button" class="btn btn-primary" onclick="generateNonce('takeFromRichNonce')">Design Plan</button>
+                  <button type="button" class="btn btn-primary" onclick="takeFromRich()">Take From the Rich</button>
+                </div>
+              </form>
+              <br />
+            </div>
         </div>
-      </form>
     </div>
 
   </body>
@@ -168,6 +182,18 @@ function generateNonceFrom(difficulty, challenge) {
     return nonce;
 }
 
+function getWalletBalance() {
+    this.myContractInstance.balanceOf.call(this.web3.eth.accounts[0], function(error, balance) {
+      if (error) {
+        return;
+      }
+
+      document.getElementById('currentBalance').innerHTML = balance + ' RHC';
+    });
+}
+
+setInterval(function(){ getWalletBalance(); }, 3000);
+
 function loadContract() {
   var self = this;
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
@@ -211,6 +237,8 @@ function loadContract() {
     self.myContractInstance = self.MyContract.at(self.contractAddress);
 
     self.web3.eth.defaultAccount = self.web3.eth.accounts[0];
+
+    getWalletBalance();
   });
 }
 
