@@ -147,6 +147,15 @@ function transfer() {
   });
 }
 
+function toPaddedHexString(a) {
+  let result = a.toString(16);
+  while (result.length < 64) {
+    result = '0' + result;
+  }
+  result = '0x' + result;
+  return result;
+}
+
 function generateNonce(id) {
   var challenge;
   this.myContractInstance.currentChallenge.call(function(err, res) {
@@ -154,16 +163,16 @@ function generateNonce(id) {
     if (id == 'getPaidNonce') {
       this.myContractInstance.paydayDifficulty.call(
         function(err, res){
-          var difficulty = '0x' + res.toString(16);
-          var nonce = generateNonceFrom(difficulty, challenge);
+          var target = toPaddedHexString(res);
+          var nonce = generateNonceFrom(target, challenge);
           document.getElementById(id).value = nonce;
         }
       );
     } else if (id == 'takeFromRichNonce') {
       this.myContractInstance.robberyDifficulty.call(
         function(err, res){
-          var difficulty = '0x' + res.toString(16);
-          var nonce = generateNonceFrom(difficulty, challenge);
+          var target = toPaddedHexString(res);
+          var nonce = generateNonceFrom(target, challenge);
           document.getElementById(id).value = nonce;
         }
       );
