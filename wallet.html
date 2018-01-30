@@ -43,7 +43,7 @@
               <form class="form-inline">
                 <div class="form-group">
                   <input type="text" class="form-control mx-sm-3" id="getPaidNonce" placeholder="nonce">
-                  <button type="button" class="btn btn-primary" onclick="generateNonce('getPaidNonce')">Do Work</button>
+                  <button id="workbutton" type="button" class="btn btn-primary" onclick="generateNonce('getPaidNonce', 'workbutton')">Do Work</button>
                   <button type="button" class="btn btn-primary" onclick="getPaid()">Get Paid</button>
                 </div>
               </form>
@@ -52,7 +52,7 @@
               <form class="form-inline">
                 <div class="form-group">
                   <input type="text" class="form-control mx-sm-3" id="takeFromRichNonce" placeholder="nonce">
-                  <button type="button" class="btn btn-primary" onclick="generateNonce('takeFromRichNonce')">Design Plan</button>
+                  <button id="designplanbutton" type="button" class="btn btn-primary" onclick="generateNonce('takeFromRichNonce', 'designplanbutton')">Design Plan</button>
                   <button type="button" class="btn btn-primary" onclick="takeFromRich()">Take From the Rich</button>
                 </div>
               </form>
@@ -156,7 +156,8 @@ function toPaddedHexString(a) {
   return result;
 }
 
-function generateNonce(id) {
+function generateNonce(id, buttonId) {
+  document.getElementById(buttonId).disabled = true;
   var challenge;
   this.myContractInstance.currentChallenge.call(function(err, res) {
     challenge = res;
@@ -166,6 +167,7 @@ function generateNonce(id) {
           var target = toPaddedHexString(res);
           var nonce = generateNonceFrom(target, challenge);
           document.getElementById(id).value = nonce;
+          document.getElementById(buttonId).disabled = false;
         }
       );
     } else if (id == 'takeFromRichNonce') {
@@ -174,9 +176,11 @@ function generateNonce(id) {
           var target = toPaddedHexString(res);
           var nonce = generateNonceFrom(target, challenge);
           document.getElementById(id).value = nonce;
+          document.getElementById(buttonId).disabled = false;
         }
       );
     } else {
+      document.getElementById(buttonId).disabled = false;
       return;
     }
   });
