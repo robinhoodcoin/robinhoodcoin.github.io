@@ -182,28 +182,10 @@ function generateNonce(id) {
   });
 }
 
-function generateNonceFrom(target, challenge) {
-  let nonce = 0;
-  let done = false;
+function generateNonceFrom(difficulty, challenge) {
+    var nonce = 'nonce';
 
-  console.log('starting to mine');
-  console.log('target: ', target);
-  console.log('challenge: ', challenge);
-
-  // TODO: Run is a web worker
-  while (!done) {
-    let data = '0x' + nonce.toString(16) + challenge.replace('0x', '')
-    console.log('data: ', data);
-    let digest = this.web3.sha3(data, {encoding: 'hex'});
-    if (digest < target) {
-      console.log('digest: ', digest);
-      console.info('nonce: ', nonce);
-      done = true;
-    } else {
-      nonce += 1;
-    }
-  }
-  return nonce;
+    return nonce;
 }
 
 function getWalletBalance() {
