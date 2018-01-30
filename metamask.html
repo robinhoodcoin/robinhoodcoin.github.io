@@ -192,8 +192,7 @@ function generateNonceFrom(target, challenge) {
 
   // TODO: Run is a web worker
   while (!done) {
-    let data = '0x' + nonce.toString(16) + challenge.replace('0x', '')
-    console.log('data: ', data);
+    let data = toPaddedHexString(nonce) + challenge.replace('0x', '');
     let digest = this.web3.sha3(data, {encoding: 'hex'});
     if (digest < target) {
       console.log('digest: ', digest);
