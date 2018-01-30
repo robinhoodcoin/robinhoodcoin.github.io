@@ -147,41 +147,62 @@ function transfer() {
   });
 }
 
-function generateNonce(id) {
-  var challenge;
-    this.myContractInstance.currentChallenge.call(function(err, res) {
-      challenge = res;
-      var difficulty;
-      if (id == 'getPaidNonce') {
-        this.myContractInstance.paydayDifficulty.call(
-          function(err, res){
-            difficulty = res;
-            console.log(difficulty);
-            console.log(challenge);
-            var nonce = generateNonceFrom(difficulty, challenge);
-            document.getElementById(id).innerHTML = nonce;
-          }
-        );
-      } else if (id == 'takeFromRichNonce') {
-        this.myContractInstance.robberyDifficulty.call(
-          function(err, res){
-            difficulty = res;
-            console.log(difficulty);
-            console.log(challenge);
-            var nonce = generateNonceFrom(difficulty, challenge);
-            document.getElementById(id).innerHTML = nonce;
-          }
-        );
-      } else {
-        return;
-      }
-    });
+function toPaddedHexString(a) {
+  let result = a.toString(16);
+  while (result.length < 64) {
+    result = '0' + result;
+  }
+  result = '0x' + result;
+  return result;
 }
 
-function generateNonceFrom(difficulty, challenge) {
-    var nonce = 'nonce';
+function generateNonce(id) {
+  var challenge;
+  this.myContractInstance.currentChallenge.call(function(err, res) {
+    challenge = res;
+    if (id == 'getPaidNonce') {
+      this.myContractInstance.paydayDifficulty.call(
+        function(err, res){
+          var target = toPaddedHexString(res);
+          var nonce = generateNonceFrom(target, challenge);
+          document.getElementById(id).value = nonce;
+        }
+      );
+    } else if (id == 'takeFromRichNonce') {
+      this.myContractInstance.robberyDifficulty.call(
+        function(err, res){
+          var target = toPaddedHexString(res);
+          var nonce = generateNonceFrom(target, challenge);
+          document.getElementById(id).value = nonce;
+        }
+      );
+    } else {
+      return;
+    }
+  });
+}
 
-    return nonce;
+function generateNonceFrom(target, challenge) {
+  let nonce = 0;
+  let done = false;
+
+  console.log('starting to mine');
+  console.log('target: ', target);
+  console.log('challenge: ', challenge);
+
+  // TODO: Run is a web worker
+  while (!done) {
+    let data = toPaddedHexString(nonce) + challenge.replace('0x', '');
+    let digest = this.web3.sha3(data, {encoding: 'hex'});
+    if (digest < target) {
+      console.log('digest: ', digest);
+      console.info('nonce: ', nonce);
+      done = true;
+    } else {
+      nonce += 1;
+    }
+  }
+  return nonce;
 }
 
 function getWalletBalance() {
