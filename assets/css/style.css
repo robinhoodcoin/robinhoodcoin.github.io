@@ -2,6 +2,7 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   text-align: center;
+  overflow-x: hidden;
 }
 
 a {
@@ -89,4 +90,5 @@ a {
     height: 120px;
     animation: spin 2s linear infinite;
 }
+
 
