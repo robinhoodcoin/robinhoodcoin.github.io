@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Metamask</title>
+    <title>Wallet</title>
     <link rel='stylesheet' href='./assets/css/style.css' />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -18,6 +18,7 @@
     <div id="rhcfunctions"class="container">
         <div class="row">
             <div class="balances col-md-5">
+              Role: <span id="currentRole">Loading...</span><br />
               Address: <span id="currentAddress">Loading...</span><br />
               Current balance: <span id="currentBalance">Loading...</span><br />
 
@@ -61,16 +62,40 @@
         </div>
     </div>
 
-    <div id="rhcOwnerFunctions" class="container" style="display:'none';">
+    <div id="rhcKingFunctions" class="container" style="display:'none';">
+      <div class="row">
+        <div class="setTakePercent col-md-5">
+          <form class="form-inline">
+            <div class="form-group">
+              <input type="number" class="form-control mx-sm-3" id="taxPercent" placeholder="0" min="0" max="100">
+              <button type="button" class="btn btn-primary" onclick="setTaxPercent()">Set Tax Percent</button>
+            </div>
+          </form>
+          <br />
+        </div>
+      </div>
     </div>
 
-    <div id="rhcKingFunctions" class="container" style="display:'none';">
+    <div id="rhcOwnerFunctions" class="container" style="display:'none';">
+      <div class="row">
+          <div class="balances col-md-5">
+            Government Ether: <span id="governmentEther">Loading...</span><br />
+            Government RHC: <span id="governmentRhc">Loading...</span><br />
+          </div>
+
+          <div class="ownerFunctions col-md-5">
+            transferOwnership<br />
+            withdrawEther<br />
+            setPrices<br />
+            setMinBalance<br />
+          </div>
+      </div>
     </div>
 
   </body>
   <br />
   <footer>
-    <a href="./contract.html">Contract</a> | <a href="./howto.html">Getting Started</a> | <a href="https://github.com/robinhoodcoin/RobinhoodCoin">Source</a> | <a href="documentation.html">Documentation</a> | <a href="./developers.html">Developers</a> | <a href="./scoreboard.html">Scoreboard</a> | <b>Metamask</b><br />
+    <a href="./contract.html">Contract</a> | <a href="./howto.html">Getting Started</a> | <a href="https://github.com/robinhoodcoin/RobinhoodCoin">Source</a> | <a href="documentation.html">Documentation</a> | <a href="./developers.html">Developers</a> | <a href="./scoreboard.html">Scoreboard</a> | <b>Wallet</b><br />
   </footer>
 </html>
 
@@ -147,13 +172,19 @@ function transfer() {
   });
 }
 
-function toPaddedHexString(a) {
-  let result = a.toString(16);
-  while (result.length < 64) {
-    result = '0' + result;
+function setTaxPercent() {
+  var percent = document.getElementById("taxPercent").value;
+  if (!percent) {
+      return;
   }
-  result = '0x' + result;
-  return result;
+
+  this.myContractInstance.setTaxPercent(percent, function(error, success) {
+    if (error) {
+      return;
+    }
+
+    alert('success: ' + success);
+  });
 }
 
 function generateNonce(id, buttonId) {
@@ -209,8 +240,18 @@ function generateNonceFrom(target, challenge) {
   return nonce;
 }
 
-function getWalletBalance() {
-    this.myContractInstance.balanceOf.call(this.web3.eth.accounts[0], function(error, balance) {
+function getRole(address) {
+  this.myContractInstance.getRole(address, function(error, role) {
+    if (error) {
+      return;
+    }
+
+    document.getElementById('currentRole').innerHTML = role;
+  });
+}
+
+function getWalletBalance(address) {
+    this.myContractInstance.balanceOf.call(address, function(error, balance) {
       if (error) {
         return;
       }
@@ -263,7 +304,8 @@ function loadContract() {
 
     self.web3.eth.defaultAccount = self.web3.eth.accounts[0];
     setInterval(function(){
-      getWalletBalance();
+      getWalletBalance(self.web3.eth.accounts[0]);
+      getRole(self.web3.eth.accounts[0]);
       document.getElementById('currentAddress').innerHTML = this.web3.eth.accounts[0];
     }, 3000);
   });
